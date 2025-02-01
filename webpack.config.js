@@ -1,72 +1,55 @@
-const { DefinePlugin } = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const outputFilename = 'index.js';
-const devServerPort = 8111;
-
-module.exports = (env, argv) => ({
-  mode: argv.mode,
-  devtool: argv.mode === 'production' ? false : 'inline-source-map',
-  entry: './src/client/index.tsx',
+module.exports = {
+  mode: 'development',
+  entry: './src/index.tsx',
   output: {
-    path: path.join(__dirname, 'out', 'client'),
-    filename: outputFilename,
-    publicPath: '',
-    libraryTarget: 'module',
+    path: path.resolve(__dirname, 'out'),
+    filename: 'index.js',
+    libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'],
-  },
-  experiments: {
-      outputModule: true,
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
-      // Allow importing ts(x) files:
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
-        options: {
-          // transpileOnly enables hot-module-replacement
-          transpileOnly: true,
-          compilerOptions: {
-            // Overwrite the noEmit from the client's tsconfig
-            noEmit: false,
-          },
-        },
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
-      // Allow importing CSS modules:
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           'style-loader',
+          'css-loader',
           {
-            loader: 'css-loader',
+            loader: 'sass-loader',
             options: {
-              importLoaders: 1,
-              modules: true,
-            },
-          },
+              sassOptions: {
+                quietDeps: true
+              }
+            }
+          }
         ],
-      },
-    ],
+        exclude: /node_modules/
+      }
+    ]
   },
+  externals: {
+    vscode: 'commonjs vscode'
+  },
+  devtool: 'source-map',
   devServer: {
-    port: devServerPort,
-    hot: true,
-    // Disable the host check, otherwise the bundle running in VS Code won't be
-    // able to connect to the dev server
-    disableHostCheck: true,
-    writeToDisk: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    static: path.join(__dirname, 'out'),
+    compress: true,
+    port: 9000,
+    open: true
   },
   plugins: [
-    new DefinePlugin({
-      // Path from the output filename to the output directory
-      __webpack_relative_entrypoint_to_root__: JSON.stringify(
-        path.posix.relative(path.posix.dirname(`/${outputFilename}`), '/'),
-      ),
-      scriptUrl: 'import.meta.url',
-    }),
-  ],
-});
+    new HtmlWebpackPlugin({
+      template: './out/index.html'
+    })
+  ]
+};

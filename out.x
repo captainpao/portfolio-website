@@ -1,9 +1,9 @@
 
-> notebook-renderer-react-sample@0.0.1 lint
+> src@0.0.1 lint
 > eslint
 
 
-/Users/matb/projects/vscode-extension-samples/notebook-renderer-react-sample/out/client/index.js
+/Users/matb/projects/vscode-extension-samples/src/out/client/index.js
   2:22      error  Expected an assignment or function call and instead saw an expression        @typescript-eslint/no-unused-expressions
   2:110     error  Missing semicolon                                                            @stylistic/js/semi
   2:316     error  'btoa' is not defined                                                        no-undef
@@ -1633,10 +1633,10 @@
   2:134269  error  Missing semicolon                                                            @stylistic/js/semi
   2:134289  error  'e' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
 
-/Users/matb/projects/vscode-extension-samples/notebook-renderer-react-sample/src/client/css.d.ts
+/Users/matb/projects/vscode-extension-samples/src/src/client/css.d.ts
   2:17  error  A record is preferred over an index signature  @typescript-eslint/consistent-indexed-object-style
 
-/Users/matb/projects/vscode-extension-samples/notebook-renderer-react-sample/webpack.config.js
+/Users/matb/projects/vscode-extension-samples/src/webpack.config.js
    1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
    1:26  error  'require' is not defined                 no-undef
    2:14  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports

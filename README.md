@@ -1,4 +1,4 @@
-# notebook-renderer-react-sample
+# src
 
 ⚠️ Work-in-progress starter code for custom notebook renderers in VS Code. Expect this to change as notebooks matures. ⚠️
 
@@ -11,7 +11,7 @@ This starter includes:
 
 ### Running this Sample
 
- 1. `cd notebook-renderer-react-sample`
+ 1. `cd src`
  1. `code-insiders .`: Open the folder in VS Code Insiders
  1. Hit `F5` to build+debug
 
