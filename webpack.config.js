@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'out'),
     filename: 'index.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'umd' // Change this line
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -34,7 +34,15 @@ module.exports = {
           }
         ],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ]
   },
   externals: {

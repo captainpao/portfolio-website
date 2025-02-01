@@ -1,4 +1,9 @@
-@use 'bootstrap' as *;
+// Import Bootstrap with a namespace and override variables
+@use 'bootstrap' with (
+  $primary: #083fa0, // Custom primary color
+  $secondary: #33c1ff // Custom secondary color
+);
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
